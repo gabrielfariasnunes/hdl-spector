@@ -1,11 +1,9 @@
 {
-    "background_color":"#FAFAFA",   
+    "background_color":"#FFFFFF",   
     "title": "Hdl Spector (Alpha 1)",
     "icon":"./icons/icon.png",
     "window_config":{
-        "geometry": "500x400",
-     
-        "background": "#FAFAFA"
+        "background": "#FFFFFF"
     },
     "status_color": {
         "success": "green",
@@ -24,39 +22,50 @@
             "text":"Verificando...",
             "text_color": "#B00020"
         },
+         "canceled":{
+            "text":"Verificação cancelada!"
+        },
          "finished":{
-            "text":"Teste finalizado!."
+            "text":"Teste finalizado!"
         }
     },
     "logs_list_box":{
         "font":"arial",
         "activestyle":"none",
         "width":50,
-        "borderwidth":2,
+        "borderwidth":0,
         "height":12,
         "border": 0,
-        "background":"#FAFAFA"
+        "background":"#FFFFFF"
     },
     "file_path_label": {
         "width":56,
-        "bg_color": "#FAFAFA",
+        "bg_color": "#FFFFFF",
         "text":"Nenuma pasta selecionada"
     },
     "status_message_label": {
         "width":56,
-        "bg_color": "#FAFAFA",
+        "bg_color": "#FFFFFF",
         "text":""
     },
     "button_select_folder":{
         "text":"Selecionar pasta de testes",
         "text_color":"#000000",
-        "hover_color":"#B49C00",
-        "fg_color":"#FFDE03"
+        "hover_color":"#BBBBBB",
+        "fg_color":"#EEEEEE"
     },
      "button_start_spector":{
-        "text":"Iniciar Teste",
+        "width": 100,
+        "text":"INICIAR",
         "text_color":"#FFFFFF",
-        "hover_color":"#1D0085",
-        "fg_color":"#3303FF"
+        "hover_color":"#689F38",
+        "fg_color":"#4CAF50"
+    },
+     "button_stop_process":{
+        "width": 100,
+        "text":"CANCELAR",
+        "text_color":"#FFFFFF",
+        "hover_color":"#D32F2F",
+        "fg_color":"#F44336"
     }
 }
