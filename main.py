@@ -13,8 +13,10 @@ config = load(open("./config.json"))
 
 root = CTk()
 root.configure(**config['window_config'])
+root.iconphoto(False, PhotoImage(file=config['icon']))
 root.title(config['title'])
 root.resizable(width=False, height=False)
+
 
 frame = ttk.Frame(root, padding=12)
 frame.pack()
