@@ -64,17 +64,17 @@ def start_spector():
 
                 if is_port_success(full_path):
                     logs_list_box.insert(
-                        position, f"[PASSOU]: {file_name}")
+                        position, f"[PASSOU]: {file_name} ✓")
                     logs_list_box.itemconfig(
                         position, fg=config['status_color']['success'])
 
                 else:
                     logs_list_box.insert(
-                        position, f"[NÃO PASSOU]: {file_name}")
+                        position, f"[NÃO PASSOU]: {file_name} ✖")
                     logs_list_box.itemconfig(
                         position, fg=config['status_color']['error'])
 
-                time.sleep(0.7)
+                time.sleep(1)
                 position += 1
                 logs_list_box.see(position)
 
@@ -88,11 +88,14 @@ def start_spector():
 style = ttk.Style()
 style.configure("TFrame", background=config["background_color"])
 
+
 button_select_folder = CTkButton(controls_container, command=select_folder)
 button_select_folder.configure(**config['button_select_folder'])
 
+
 button_start_spector = CTkButton(controls_container, command=start_spector)
 button_start_spector.configure(**config['button_start_spector'])
+
 
 if __name__ == "__main__":
     controls_container.grid(column=0, row=3)
