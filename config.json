@@ -1,5 +1,61 @@
 {
-    "size": "500x400",
+    "background_color":"#FAFAFA",   
     "title": "Hdl Spector (Alpha 1)",
-    "background_color": "#FAFAFA"
+    "window_config":{
+        "geometry": "500x400",
+     
+        "background": "#FAFAFA"
+    },
+    "status_color": {
+        "success": "green",
+        "error": "#B00020"
+    },
+    "status_message":{
+        "verify":{
+            "text":"Verificando...",
+            "text_color": "#3700b3"
+        },
+        "error":{
+            "text":"Error essa pasta não contem testes hdl!",
+            "text_color": "#B00020"
+        },
+        "success":{
+            "text":"Verificando...",
+            "text_color": "#B00020"
+        },
+         "finished":{
+            "text":"Teste finalizado!."
+        }
+    },
+    "logs_list_box":{
+        "font":"arial",
+        "activestyle":"none",
+        "width":50,
+        "borderwidth":2,
+        "height":12,
+        "border": 0,
+        "background":"#FAFAFA"
+    },
+    "file_path_label": {
+        "width":56,
+        "bg_color": "#FAFAFA",
+        "text":"Nenuma pasta selecionada"
+    },
+    "status_message_label": {
+        "width":56,
+        "bg_color": "#FAFAFA",
+        "text":""
+    },
+    "button_select_folder":{
+        "text":"Selecionar pasta de testes",
+        "text_color":"#000000",
+        "hover_color":"#B49C00",
+        "fg_color":"#FFDE03"
+    },
+     "button_start_spector":{
+        "text":"Iniciar Teste",
+        "text_color":"#FFFFFF",
+        "hover_color":"#1D0085",
+        "fg_color":"#3303FF"
+    }
 }
