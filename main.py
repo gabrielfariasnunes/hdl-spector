@@ -118,10 +118,10 @@ def spector():
         if not status_running['is_canceled']:
             if total_faillure_ports > 0:
                 message_alert(
-                    'finished_error', f"Teste finalizado!, {total_faillure_ports} portas com erro de implentação!")
+                    'finished_error', f"Teste finalizado!, e {total_faillure_ports} portas com erro de implentação!")
             else:
                 message_alert(
-                    'finished_success', f"Teste finalizado!, sem nenhuma porta com error, Parabéns!")
+                    'finished_success', f"Teste finalizado!, e sem nenhuma porta com error, Parabéns!")
 
     except:
         message_alert('error', 'Error essa pasta não contem testes hdl!')
