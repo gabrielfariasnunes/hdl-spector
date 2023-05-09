@@ -58,8 +58,8 @@ def start_spector_thread():
 def list_tsts():
     tsts = []
     path = get_folder_location()
-    ports = listdir(path)
-    for port in ports:
+
+    for port in listdir(path):
         if port.endswith(".tst"):
             tsts.append(port)
     return tsts
@@ -85,21 +85,33 @@ def log_next_event(position):
     logs_list_box.see(position)
 
 
-def change_progress_state(position, total):
+def show_progress(position, total):
     progress = int((position / total) * 100)
     message_alert('checking_color', f'Verificando...({progress}%) concluido')
 
 
+def create_window():
+    file_path_label.grid(column=0, row=0, pady=2)
+    logs_list_box.grid(column=0, row=2, pady=20)
+    status_message_label.grid(column=0, row=3, pady=2)
+    controls_container.grid(column=0, row=4)
+    button_select_folder.grid(column=1, row=1, padx=5, pady=10)
+    button_stop_process.grid(column=2, row=1, padx=5, pady=10)
+    button_start_spector.grid(column=3, row=1, padx=5, pady=10)
+    root.mainloop()
+
+
 def spector():
-    position = 0
     total_faillure_ports = 0
     logs_list_box.delete(0, END)
     status_running['is_canceled'] = False
 
     try:
         tsts = list_tsts()
+        total = len(tsts)
         folder_path = get_folder_location()
-        for file in list_tsts():
+
+        for position, file in enumerate(list_tsts()):
             if file.endswith(".tst"):
                 logs_list_box.update()
                 full_path = f"{folder_path}/{file}"
@@ -115,8 +127,7 @@ def spector():
                     total_faillure_ports += 1
                     log_add_event(position, f"[NÃO PASSOU]: {file_name} ✖", False)
 
-                position += 1
-                change_progress_state(position, len(tsts))
+                show_progress(position, total)
                 log_next_event(position)
                 sleep(INTERVAL_CHECK)
 
@@ -151,21 +162,11 @@ separator = Frame(frame, height=1, width=450, background="#eee")
 button_select_folder = CTkButton(controls_container, command=select_folder)
 button_select_folder.configure(**config['button_select_folder'])
 
-button_start_spector = CTkButton(
-    controls_container,
-    command=start_spector_thread)
+button_start_spector = CTkButton(controls_container,command=start_spector_thread)
 
 button_start_spector.configure(**config['button_start_spector'])
 
 button_stop_process = CTkButton(controls_container, command=stop_process)
 button_stop_process.configure(**config['button_stop_process'])
 
-if __name__ == "__main__":
-    file_path_label.grid(column=0, row=0, pady=2)
-    logs_list_box.grid(column=0, row=2, pady=20)
-    status_message_label.grid(column=0, row=3, pady=2)
-    controls_container.grid(column=0, row=4)
-    button_select_folder.grid(column=1, row=1, padx=5, pady=10)
-    button_stop_process.grid(column=2, row=1, padx=5, pady=10)
-    button_start_spector.grid(column=3, row=1, padx=5, pady=10)
-    root.mainloop()
+if __name__ == "__main__": create_window()
