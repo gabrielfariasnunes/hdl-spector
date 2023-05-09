@@ -1,71 +1,69 @@
 {
-    "background_color":"#FFFFFF",   
-    "title": "Hdl Spector (Alpha 1)",
-    "icon":"./icons/icon.png",
-    "window_config":{
-        "background": "#FFFFFF"
+  "background_color": "#FFFFFF",
+  "title": "Hdl Spector (Alpha 1)",
+  "icon": "./icons/icon.png",
+  "window_config": {
+    "background": "#FFFFFF"
+  },
+  "status_color": {
+    "success": "green",
+    "error": "#B00020"
+  },
+  "status_message": {
+    "verify": {
+      "text_color": "#3700b3"
     },
-    "status_color": {
-        "success": "green",
-        "error": "#B00020"
+    "error": {
+      "text_color": "#B00020"
     },
-    "status_message":{
-        "verify":{
-            "text":"Verificando...",
-            "text_color": "#3700b3"
-        },
-        "error":{
-            "text":"Error essa pasta não contem testes hdl!",
-            "text_color": "#B00020"
-        },
-        "success":{
-            "text":"Verificando...",
-            "text_color": "#B00020"
-        },
-         "canceled":{
-            "text":"Verificação cancelada!"
-        },
-         "finished":{
-            "text":"Teste finalizado!"
-        }
+    "success": {
+      "text_color": "#B00020"
     },
-    "logs_list_box":{
-        "font":"arial",
-        "activestyle":"none",
-        "width":50,
-        "borderwidth":0,
-        "height":12,
-        "border": 0,
-        "background":"#FFFFFF"
+    "finished_success": {
+      "text_color": "#4CAF50"
     },
-    "file_path_label": {
-        "width":56,
-        "bg_color": "#FFFFFF",
-        "text":"Nenuma pasta selecionada"
-    },
-    "status_message_label": {
-        "width":56,
-        "bg_color": "#FFFFFF",
-        "text":""
-    },
-    "button_select_folder":{
-        "text":"Selecionar pasta de testes",
-        "text_color":"#000000",
-        "hover_color":"#BBBBBB",
-        "fg_color":"#EEEEEE"
-    },
-     "button_start_spector":{
-        "width": 100,
-        "text":"INICIAR",
-        "text_color":"#FFFFFF",
-        "hover_color":"#689F38",
-        "fg_color":"#4CAF50"
-    },
-     "button_stop_process":{
-        "width": 100,
-        "text":"CANCELAR",
-        "text_color":"#FFFFFF",
-        "hover_color":"#D32F2F",
-        "fg_color":"#F44336"
+    "finished_error": {
+      "text_color": "#B00020"
     }
+  },
+  "logs_list_box": {
+    "font": "arial",
+    "activestyle": "none",
+    "width": 50,
+    "borderwidth": 0,
+    "height": 12,
+    "border": 0,
+    "background": "#FFFFFF"
+  },
+  "file_path_label": {
+    "width": 56,
+    "bg_color": "#FFFFFF",
+    "text": "Nenuma pasta selecionada"
+  },
+  "status_message_label": {
+    "width": 56,
+    "bg_color": "#FFFFFF",
+    "text": ""
+  },
+  "button_select_folder": {
+    "border_width": 1,
+    "text": "Selecionar pasta de testes",
+    "text_color": "#000000",
+    "hover_color": "#BBBBBB",
+    "fg_color": "#EEEEEE"
+  },
+  "button_start_spector": {
+    "width": 100,
+    "text": "INICIAR",
+    "text_color": "#FFFFFF",
+    "hover_color": "#689F38",
+    "fg_color": "#4CAF50"
+  },
+  "button_stop_process": {
+    "width": 100,
+    "text": "CANCELAR",
+    "text_color": "#FFFFFF",
+    "hover_color": "#D32F2F",
+    "fg_color": "#F44336"
+  }
 }

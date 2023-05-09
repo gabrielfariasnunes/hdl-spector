@@ -1,5 +1,5 @@
 import os
-import subprocess
+import compiler
 import time
 import threading
 from json import load
@@ -31,13 +31,19 @@ frame = ttk.Frame(root, padding=12)
 frame.grid()
 
 
-file_path_label = CTkLabel(frame, font=('arial', 18), wraplength=250)
+file_path_label = CTkLabel(
+    frame,
+    font=('arial', 18),
+    wraplength=250)
+
+
 file_path_label.configure(**config['file_path_label'])
 
 
-status_message_label = CTkLabel(frame, font=('arial', 16))
-status_message_label.configure(**config['status_message_label'])
+status_progress_bar = CTkProgressBar(frame, width=385,  height=5)
+status_progress_bar.set(0)
 
+status_message_label = CTkLabel(frame, text="")
 
 logs_list_box = Listbox(frame)
 logs_list_box.configure(config['logs_list_box'])
@@ -49,57 +55,76 @@ def select_folder():
     file_path_label.configure(text=folder_path)
 
 
-def is_port_success(port):
-    command = ["java", "-jar", "./lib/hdl.jar", port]
-    results = subprocess.run(command, capture_output=True, text=True)
-    return results.stdout
-
-
 def start_spector_thread():
-    threading.Thread(target=start_spector).start()
+    threading.Thread(target=spector).start()
 
 
-def start_spector():
+def total_tst(ports):
+
+    total = 0
+    for port in ports:
+        if port.endswith(".tst"):
+            total += 1
+    return total
+
+
+def message_alert(type, message):
+    status_message_label.configure(text=message)
+    status_message_label.configure(**config['status_message'][type])
+
+
+def spector():
     position = 0
+    total_faillure_ports = 0
     logs_list_box.delete(0, END)
     status_running['is_canceled'] = False
-    try:
-        status_message_label.configure(**config['status_message']['verify'])
 
-        for file in os.listdir(folder_path):
+    try:
+
+        ports = os.listdir(folder_path)
+        total = total_tst(ports)
+        message_alert('verify', 'Verificando...')
+
+        for file in ports:
+
             if file.endswith(".tst"):
                 logs_list_box.update()
                 full_path = f"{folder_path}/{file}"
                 file_name = file.split(".")[0]
 
                 if status_running['is_canceled']:
-                    status_message_label.configure(
-                        **config['status_message']['canceled'])
+                    status_progress_bar.set(0)
+                    message_alert('error', 'Verificação cancelada!')
                     break
 
-                if is_port_success(full_path):
+                if compiler.build(full_path):
                     logs_list_box.insert(
                         position, f"[PASSOU]: {file_name} ✓")
                     logs_list_box.itemconfig(
                         position, fg=config['status_color']['success'])
 
                 else:
+                    total_faillure_ports += 1
                     logs_list_box.insert(
                         position, f"[NÃO PASSOU]: {file_name} ✖")
                     logs_list_box.itemconfig(
                         position, fg=config['status_color']['error'])
 
-                time.sleep(1)
                 position += 1
+                time.sleep(1)
                 logs_list_box.see(position)
+                status_progress_bar.set(((position / total)))
 
         if not status_running['is_canceled']:
-            status_message_label.configure(
-                **config['status_message']['finished'])
-            logs_list_box.see(position)
+            if total_faillure_ports > 0:
+                message_alert(
+                    'finished_error', f"Teste finalizado!, {total_faillure_ports} portas com erro de implentação!")
+            else:
+                message_alert(
+                    'finished_success', f"Teste finalizado!, sem nenhuma porta com error, Parabéns!")
 
     except:
-        status_message_label.configure(**config['status_message']['error'])
+        message_alert('error', 'Error essa pasta não contem testes hdl!')
 
 
 def stop_process():
@@ -110,15 +135,20 @@ def stop_process():
 
 controls_container = ttk.Frame(frame)
 
+
 separator = Frame(frame, height=1, width=450, background="#eee")
+
 
 button_select_folder = CTkButton(controls_container, command=select_folder)
 button_select_folder.configure(**config['button_select_folder'])
 
 
 button_start_spector = CTkButton(
-    controls_container, command=start_spector_thread)
+    controls_container,
+    command=start_spector_thread)
+
 button_start_spector.configure(**config['button_start_spector'])
+
 
 button_stop_process = CTkButton(controls_container, command=stop_process)
 button_stop_process.configure(**config['button_stop_process'])
@@ -127,7 +157,7 @@ button_stop_process.configure(**config['button_stop_process'])
 if __name__ == "__main__":
     file_path_label.grid(column=0, row=0, pady=2)
     logs_list_box.grid(column=0, row=2, pady=20)
-    separator.grid(column=0, row=3, pady=12)
+    status_progress_bar.grid(column=0, row=3, pady=2)
     status_message_label.grid(column=0, row=4, pady=2)
     controls_container.grid(column=0, row=5)
     button_select_folder.grid(column=1, row=1, padx=5, pady=10)
