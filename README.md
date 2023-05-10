@@ -2,6 +2,7 @@
 
 #### Finalidade do programa e automatizar os  testes de portas lógicas feitas no nand2tetris
 
+##### Java is required for the program to run correctly.
 
 ##### Install the libraries before starting the application
 
