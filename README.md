@@ -21,4 +21,4 @@
 <img src="./screens/screen_1.png"/>
 <img src="./screens/screen_2.png"/>
 
-##### Developed width :heart: in Python by Gabriel
+##### Developed with :heart: in Python by Gabriel
