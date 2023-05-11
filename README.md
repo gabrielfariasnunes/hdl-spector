@@ -16,7 +16,7 @@
  python main.py`
 ```
 
-### Screenhots
+### Screenshots
 
 <img src="./screens/screen_1.png"/>
 <img src="./screens/screen_2.png"/>
